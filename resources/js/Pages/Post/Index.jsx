@@ -1,11 +1,12 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, WhenVisible } from '@inertiajs/react';
+import { Head, usePage, WhenVisible } from '@inertiajs/react';
 import PostCard from '@/Components/Cards/PostCard';
 import CreateLink from '@/Components/Links/CreateLink';
 import DefaultPaginator from '@/Components/Paginators/DefaultPaginator';
 import FallBackComponent from '@/Components/FallbackComponent';
 
 export default function Index({ posts }) {
+    const {is_admin} =usePage().props.auth;
     return (
         <AuthenticatedLayout
             header={
@@ -18,9 +19,9 @@ export default function Index({ posts }) {
 
             <div className="py-12 w-full">
                 <div className="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
-                    <CreateLink href={route('posts.create')}>
+                { is_admin &&    <CreateLink href={route('posts.create')}>
                         Create new post
-                    </CreateLink>
+                    </CreateLink>}
                     <WhenVisible data={posts} fallback={<FallBackComponent/>}>
                         <div className=" grid gap-3 primary_color p-4 shadow sm:rounded-lg sm:p-8">
 

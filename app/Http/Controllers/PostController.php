@@ -48,7 +48,6 @@ class PostController extends Controller
             ->latest()
             ->paginate(10);
 
-
         return inertia('Post/Bin', [
             'posts' => PostResource::collection($posts),
         ]);
@@ -73,7 +72,6 @@ class PostController extends Controller
             $post->addMedia($request->image)->toMediaCollection('images');
         }
     }
-
 
     public function edit(Post $post)
     {
@@ -129,8 +127,6 @@ class PostController extends Controller
         $post->forceDelete();
     }
 
-
-
     public function react(Request $request, Post $post)
     {
 
@@ -142,20 +138,21 @@ class PostController extends Controller
             // If the reaction is the same, remove it (unreact)
             if ($reaction->type === $request->type) {
                 $reaction->delete();
+
                 return back();
             }
 
-
             $reaction->update(['type' => $request->type]);
+
             return back();
         }
-
 
         Reaction::create([
             'user_id' => $request->user_id,
             'post_id' => $post->id,
             'type' => $request->type,
         ]);
+
         return back();
     }
 }

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 
 export default function AuthenticatedLayout({ header, children }) {
-    const { user } = usePage().props.auth;
+    const { user,is_admin } = usePage().props.auth;
     const { url } = usePage();
     const [openSideBar, setOpenSideBar] = useState(false);
 
@@ -41,12 +41,14 @@ export default function AuthenticatedLayout({ header, children }) {
                     <SideLink href={route('home')} active={route().current('home') || route().current('posts.create') || route().current('posts.edit') }>
                         Home
                     </SideLink>
+                  { is_admin && <>
                     <SideLink href={route('posts.archive')} active={route().current('posts.archive')}>
                         Archives
                     </SideLink>
                     <SideLink href={route('posts.bin')} active={route().current('posts.bin')}>
                         Bin
                     </SideLink>
+                  </>}
                     <SideLink href={route('profile.edit')} active={url.startsWith('/profile')}>
                         Profile
                     </SideLink>

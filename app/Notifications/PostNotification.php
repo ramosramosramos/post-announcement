@@ -3,7 +3,6 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -35,9 +34,9 @@ class PostNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('Hello, I would like to announce you that admin has new post. ')
-                    ->action('Click here to the see annoucement', route('home'))
-                    ->line('Thank you for using our application!');
+            ->line('Hello, I would like to announce you that admin has new post. ')
+            ->action('Click here to the see annoucement', route('home'))
+            ->line('Thank you for using our application!');
     }
 
     /**

@@ -46,8 +46,7 @@ class PostResource extends JsonResource
             'reactions' => $reactionCounts,
             'user_reaction' => $userReaction ? $userReaction->type : null, // Include the user's reaction type
             'created_at' => Carbon::parse($this->created_at)->diffForHumans(),
-            'media_image' => $this->media->value('id') ? Storage::url($this->media->value('id') . '/' . $this->media->value('file_name')) : null,
+            'media_image' => $this->media->value('id') ? Storage::url($this->media->value('id').'/'.$this->media->value('file_name')) : null,
         ];
     }
 }
-

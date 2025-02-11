@@ -21,11 +21,10 @@ class ProfileController extends Controller
     {
         $qrcode = QrCode::format('svg')->size(250)->generate(route('home'));
 
-
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
-            'qrcode' => ''. $qrcode, // Convert QR code to base64 image
+            'qrcode' => ''.$qrcode, // Convert QR code to base64 image
         ]);
     }
 

@@ -23,7 +23,7 @@ class UpdatePostRequest extends FormRequest
     {
         return [
             'user_id' => ['required', 'exists:users,id'],
-            'content' => ['required_without_all:image,old_image',],
+            'content' => ['required_without_all:image,old_image'],
             'image' => ['nullable', 'image', 'max:5120'],
             'old_image' => ['nullable'],
         ];

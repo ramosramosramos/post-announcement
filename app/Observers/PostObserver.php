@@ -4,8 +4,6 @@ namespace App\Observers;
 
 use App\Jobs\PostJob;
 use App\Models\Post;
-use App\Models\User;
-use App\Notifications\PostNotification;
 
 class PostObserver
 {

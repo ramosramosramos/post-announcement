@@ -2,12 +2,10 @@
 
 namespace App\Jobs;
 
-use App\Mail\PostMail;
 use App\Models\User;
 use App\Notifications\PostNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
-use Illuminate\Support\Facades\Mail;
 
 class PostJob implements ShouldQueue
 {
