@@ -4,6 +4,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/Inputs/TextInput';
 import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
+import { toast } from 'react-toastify';
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
@@ -23,6 +24,13 @@ export default function UpdateProfileInformation({
 
         post(route('profile.update'),{
             preserveScroll:true,
+            onSuccess:()=>{
+                toast.success('Successfully updated.')
+            },
+            onError:(errors)=>{
+                toast.error(errors.name)
+                toast.error(errors.email)
+            }
         });
     };
 

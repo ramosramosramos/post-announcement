@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\StoreAvatarRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class ProfileController extends Controller
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
-            'qrcode' => ''.$qrcode, // Convert QR code to base64 image
+            'qrcode' => '' . $qrcode, // Convert QR code to base64 image
         ]);
     }
 
@@ -40,6 +41,19 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
+
+        return Redirect::route('profile.edit');
+    }
+    public function avatar(StoreAvatarRequest $request): RedirectResponse
+    {
+        $user =  $request->user();
+
+        if ($request->hasFile('avatar')) {
+            if ($user->media()->value('id')) {
+                $user->media()->delete();
+            }
+            $user->addMedia($request->avatar)->toMediaCollection('avatars');
+        }
 
         return Redirect::route('profile.edit');
     }

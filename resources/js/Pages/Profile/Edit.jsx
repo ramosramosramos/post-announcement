@@ -7,6 +7,7 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { useRef } from 'react';
 import PrimaryButton from '@/Components/PrimaryButton';
+import UpdateAvatar from './Partials/UpdateAvatar';
 export default function Edit({ mustVerifyEmail, status, qrcode }) {
     const { is_admin } = usePage().props.auth;
     const qrCodeRef = useRef();
@@ -48,6 +49,9 @@ export default function Edit({ mustVerifyEmail, status, qrcode }) {
                         >
                             Download QR code
                         </PrimaryButton>
+                    </div>
+                    <div className="primary_color p-4 shadow sm:rounded-lg sm:p-8">
+                        <UpdateAvatar className="max-w-xl" />
                     </div>
                     <div className="primary_color p-4 shadow sm:rounded-lg sm:p-8">
                         <UpdateProfileInformationForm
