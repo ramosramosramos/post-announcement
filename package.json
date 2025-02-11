@@ -26,6 +26,8 @@
         "@fontsource/roboto": "^5.1.1",
         "@mui/icons-material": "^6.4.3",
         "@mui/material": "^6.4.3",
+        "html2canvas": "^1.4.1",
+        "jspdf": "^2.5.2",
         "react-toastify": "^11.0.3"
     }
 }
