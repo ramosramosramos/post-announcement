@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Ghenisis Nolasco Capistrano',
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
-            'role' => '',
+            'role' => 'admin',
             'password' => Hash::make('password'),
             'remember_token' => str()->random(10),
         ]);
@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Kent Jerone Ramos',
             'email' => 'ramoskent12@gmail.com',
             'email_verified_at' => now(),
-            'role' => '',
+            'role' => 'admin',
             'password' => Hash::make('password'),
             'remember_token' => str()->random(10),
         ]);

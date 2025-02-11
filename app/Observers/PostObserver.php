@@ -15,7 +15,7 @@ class PostObserver
     public function created(Post $post): void
     {
 
-        PostJob::dispatch($post);
+        // PostJob::dispatch($post);
     }
 
     /**

@@ -19,7 +19,7 @@ class ReactionFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
+            'user_id' => fake()->randomElement([User::factory(),1]),
             'post_id' => Post::factory(),
             'type' => fake()->randomElement(['like', 'heart', 'sad', 'dislike', 'angry', 'wow']),
         ];

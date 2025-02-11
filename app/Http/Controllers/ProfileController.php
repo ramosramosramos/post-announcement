@@ -19,7 +19,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): Response
     {
-        $qrcode = QrCode::format('svg')->size(300)->generate(route('home'));
+        $qrcode = QrCode::format('svg')->size(250)->generate(route('home'));
 
 
         return Inertia::render('Profile/Edit', [

@@ -38,7 +38,7 @@ export default function Edit({ mustVerifyEmail, status, qrcode }) {
                             Application QR code
                         </p>
                         {/* QR Code Container */}
-                        <div ref={qrCodeRef} dangerouslySetInnerHTML={{ __html: qrcode }} />
+                        <div className='mb-5 ' ref={qrCodeRef} dangerouslySetInnerHTML={{ __html: qrcode }} />
 
                         {/* Download as PDF Button */}
                         <PrimaryButton

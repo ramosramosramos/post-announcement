@@ -17,6 +17,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/posts/{id}/restore', [PostController::class, 'restore'])->name('posts.restore');
     Route::post('/posts/{id}/forceDelete', [PostController::class, 'forceDelete'])->name('posts.forceDelete');
 
+    Route::post('/posts/{post}/react', [PostController::class, 'react'])->name('posts.react');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/profile/destroy', [ProfileController::class, 'destroy'])->name('profile.destroy');
