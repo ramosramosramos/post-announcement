@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Models\Reaction;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -16,6 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
+
         $posts = Post::query()->where('is_archive_at', null)
             ->with(['user:id,name', 'reactions', 'media'])
             ->select(['id', 'content', 'user_id', 'created_at'])
@@ -24,6 +26,7 @@ class PostController extends Controller
 
         return inertia('Post/Index', [
             'posts' => PostResource::collection($posts),
+
         ]);
     }
 

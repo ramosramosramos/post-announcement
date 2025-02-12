@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
 
     Route::get('/', [PostController::class, 'index'])->name('home');
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::middleware(['admin'])->group(function () {
         Route::get('/posts/archive/data', [PostController::class, 'archive'])->name('posts.archive');
         Route::get('/posts/bin/data', [PostController::class, 'bin'])->name('posts.bin');

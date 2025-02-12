@@ -30,14 +30,14 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        $user = $request?->user()->load('media');
+        $user = $request?->user()?->load('media');
 
         return [
             ...parent::share($request),
             'auth' => [
                 'user' => $user,
                 'is_admin' => $user?->role == 'admin',
-                'avatar' =>  $user ->media->value('id') ? Storage::url($user ->media->value('id').'/'.$user ->media->value('file_name')) : null,
+                'avatar' =>  $user?->media->value('id') ? Storage::url($user ->media->value('id').'/'.$user ->media->value('file_name')) : null,
 
             ],
         ];

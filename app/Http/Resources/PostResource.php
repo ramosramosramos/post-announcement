@@ -43,6 +43,7 @@ class PostResource extends JsonResource
             'id' => $this->id,
             'content' => $this->content,
             'name' => $this->user->name,
+            'reaction_total' => $this->reactions->count(),
             'reactions' => $reactionCounts,
             'user_reaction' => $userReaction ? $userReaction->type : null, // Include the user's reaction type
             'created_at' => Carbon::parse($this->created_at)->diffForHumans(),
