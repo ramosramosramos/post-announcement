@@ -5,10 +5,7 @@ import DefaultPaginator from '@/Components/Paginators/DefaultPaginator';
 import FallBackComponent from '@/Components/FallbackComponent';
 import SearchInput from '@/Components/Inputs/SearchInput';
 import UserCard from '@/Components/Cards/UserCard';
-import BackLink from '@/Components/Links/BackLink';
 import SelectInput from '@/Components/Inputs/SelectInput';
-import InputLabel from '@/Components/Inputs/InputLabel';
-
 export default function Index({ users, filter, props }) {
     const { is_admin } = usePage().props.auth;
     const form = useForm({});
