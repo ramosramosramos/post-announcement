@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'role' => 'admin',
             'year_level' => 'Grade 12',
-            'section' => 'A',
+            'section' => 'B',
             'password' => Hash::make('password'),
             'remember_token' => str()->random(10),
         ]);
