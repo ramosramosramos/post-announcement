@@ -9,6 +9,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/', [PostController::class, 'index'])->name('home');
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/{user}/view', [UserController::class, 'show'])->name('users.show');
     Route::middleware(['admin'])->group(function () {
         Route::get('/posts/archive/data', [PostController::class, 'archive'])->name('posts.archive');
         Route::get('/posts/bin/data', [PostController::class, 'bin'])->name('posts.bin');

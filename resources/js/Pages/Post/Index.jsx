@@ -4,7 +4,7 @@ import PostCard from '@/Components/Cards/PostCard';
 import CreateLink from '@/Components/Links/CreateLink';
 import DefaultPaginator from '@/Components/Paginators/DefaultPaginator';
 import FallBackComponent from '@/Components/FallbackComponent';
-import SearchInput from '@/Components/Inputs/SearchInput';
+
 
 export default function Index({ posts }) {
     const {is_admin} =usePage().props.auth;
@@ -25,7 +25,7 @@ export default function Index({ posts }) {
                     </CreateLink>}
 
                     <div>
-            <SearchInput/>
+
                     </div>
                     <WhenVisible data={posts} fallback={<FallBackComponent/>}>
                         <div className=" grid gap-3 primary_color p-4 shadow sm:rounded-lg sm:p-8">

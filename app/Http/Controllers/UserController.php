@@ -10,11 +10,20 @@ class UserController extends Controller
 {
     public function index(){
         $search = request()->input('search');
-        $users = User::select(['id','name'])->paginate(10);
+        $users = User::with(['media'])
+        ->when($search,function($query) use($search){
+                    $query->where('name','like','%'.$search.'%');
+
+        })
+        ->select(['id','name'])->paginate(10);
 
         return inertia('User/Index',[
             'users'=>UserResource::collection($users),
             'search'=>$search,
         ]);
+    }
+
+    public function show(User $user){
+        
     }
 }
