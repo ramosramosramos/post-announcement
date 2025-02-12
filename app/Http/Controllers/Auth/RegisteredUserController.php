@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Section;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -20,7 +21,15 @@ class RegisteredUserController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('Auth/Register');
+        $sections = Section::select(['id', 'name'])->get();
+        $year_levels = Section::select(['id', 'name'])->get();
+
+        return Inertia::render('Auth/Register', [
+            'props' => [
+                'sections' => $sections,
+                'year_levels' => $year_levels,
+            ],
+        ]);
     }
 
     /**

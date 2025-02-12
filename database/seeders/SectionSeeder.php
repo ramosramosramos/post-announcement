@@ -13,16 +13,16 @@ class SectionSeeder extends Seeder
     public function run(): void
     {
         Section::create([
-            'name'=>'A'
+            'name' => 'A',
         ]);
         Section::create([
-            'name'=>'B'
+            'name' => 'B',
         ]);
         Section::create([
-            'name'=>'C'
+            'name' => 'C',
         ]);
         Section::create([
-            'name'=>'D'
+            'name' => 'D',
         ]);
     }
 }

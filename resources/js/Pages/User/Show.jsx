@@ -33,7 +33,12 @@ export default function Index({ user, search }) {
                                     title={user.data?.name}
                                     subheader={user.data?.email}
                                 />
+                                <CardContent>
+                                    <Typography color='warning'>
+                                        {user.data?.year_level}   -  {user.data?.section}
 
+                                    </Typography>
+                                </CardContent>
 
                             </Card>
                         </div>

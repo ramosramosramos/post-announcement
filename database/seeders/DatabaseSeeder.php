@@ -38,7 +38,6 @@ class DatabaseSeeder extends Seeder
             'remember_token' => str()->random(10),
         ]);
 
-
         $this->call([
             SectionSeeder::class,
             YearLevelSeeder::class,

@@ -15,7 +15,7 @@ class UserController extends Controller
                 $query->where('name', 'like', '%'.$search.'%');
 
             })
-            ->select(['id', 'name','section','year_level'])->paginate(10);
+            ->select(['id', 'name', 'section', 'year_level'])->paginate(10);
 
         return inertia('User/Index', [
             'users' => UserResource::collection($users),

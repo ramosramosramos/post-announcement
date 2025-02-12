@@ -13,13 +13,13 @@ class YearLevelSeeder extends Seeder
     public function run(): void
     {
         YearLevel::create([
-            'name'=>'Grade 10'
+            'name' => 'Grade 10',
         ]);
         YearLevel::create([
-            'name'=>'Grade 11'
+            'name' => 'Grade 11',
         ]);
         YearLevel::create([
-            'name'=>'Grade 12'
+            'name' => 'Grade 12',
         ]);
     }
 }
