@@ -5,6 +5,7 @@ import DefaultPaginator from '@/Components/Paginators/DefaultPaginator';
 import FallBackComponent from '@/Components/FallbackComponent';
 import SearchInput from '@/Components/Inputs/SearchInput';
 import UserCard from '@/Components/Cards/UserCard';
+import BackLink from '@/Components/Links/BackLink';
 
 export default function Index({ users,search }) {
     const { is_admin } = usePage().props.auth;
@@ -20,6 +21,7 @@ export default function Index({ users,search }) {
 
             <div className="py-12 w-full">
                 <div className="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
+
 
                     <div>
                         <SearchInput search={search} />

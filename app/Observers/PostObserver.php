@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Jobs\PostJob;
 use App\Models\Post;
+use App\Models\User;
 
 class PostObserver
 {
@@ -12,8 +13,9 @@ class PostObserver
      */
     public function created(Post $post): void
     {
-
-        PostJob::dispatch($post);
+        User::select('id', 'email')->cursor()->each(function ($user) use ($post) {
+            PostJob::dispatch($user, $post);
+        });
     }
 
     /**

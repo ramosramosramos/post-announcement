@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Post;
-use App\Models\Reaction;
+// use App\Models\Post;
+// use App\Models\Reaction;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -26,6 +26,14 @@ class DatabaseSeeder extends Seeder
             'remember_token' => str()->random(10),
         ]);
         User::create([
+            'name' => 'Ghenisis Nolasco Capistrano Admin 2',
+            'email' => 'admin2@gmail.com',
+            'email_verified_at' => now(),
+            'role' => 'admin',
+            'password' => Hash::make('password'),
+            'remember_token' => str()->random(10),
+        ]);
+        User::create([
             'name' => 'Kent Jerone Ramos',
             'email' => 'ramoskent12@gmail.com',
             'email_verified_at' => now(),
@@ -33,8 +41,8 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'remember_token' => str()->random(10),
         ]);
-        User::factory(10)->create();
-        Post::factory(100)->create();
-        Reaction::factory(100)->create();
+        // User::factory(10)->create();
+        // Post::factory(100)->create();
+        // Reaction::factory(100)->create();
     }
 }

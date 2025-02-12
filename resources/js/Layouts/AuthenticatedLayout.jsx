@@ -1,4 +1,5 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
+import BackLink from '@/Components/Links/BackLink';
 import SideLink from '@/Components/Links/SideLink';
 import { usePage } from '@inertiajs/react';
 import { useState } from 'react';
@@ -65,7 +66,12 @@ export default function AuthenticatedLayout({ header, children }) {
             <div className="flex">
                 {/* Main Content */}
                 <main className="mt-[60px] w-full min-h-screen p-4">
-                    <header className="w-[95%] m-auto text-start p-5 text-white">
+                    <header className="w-[95%] flex flex-col gap-10 m-auto text-start p-5 text-white">
+                 { !route().current('home') &&
+                           <BackLink  href={route('home')} className="flex gap-3 text-sm items-center text-gray-800 hover:text-gray-700 w-[max-content]">
+                           Back to home
+                       </BackLink>
+                 }
                         {header}
                     </header>
                     {children}

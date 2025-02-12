@@ -17,7 +17,7 @@ import { toast } from 'react-toastify';
 import { useForm, usePage } from '@inertiajs/react';
 
 export default function PostCard({ post }) {
-    const {user} = usePage().props.auth;
+    const { user, is_admin } = usePage().props.auth;
     const reactionIcons = [
         { icon: FavoriteIcon, type: 'heart' },
         { icon: ThumbUpIcon, type: 'like' },
@@ -28,9 +28,9 @@ export default function PostCard({ post }) {
     ];
 
     const form = useForm({});
-    const handleReact = (type)=>{
-        form.post(route('posts.react',{post:post.id,type:type,user_id:user.id}),{
-            preserveScroll:true,
+    const handleReact = (type) => {
+        form.post(route('posts.react', { post: post.id, type: type, user_id: user.id }), {
+            preserveScroll: true,
 
         })
     }
@@ -39,34 +39,40 @@ export default function PostCard({ post }) {
             <CardHeader
                 avatar={<Avatar src={post?.avatar ?? ''} alt={post?.name} sx={{ bgcolor: red[500] }} />}
                 action={
-                    <Dropdown>
-                        <Dropdown.Trigger>
-                            <IconButton aria-label="settings">
-                                <MoreVertIcon />
-                            </IconButton>
-                        </Dropdown.Trigger>
-                        <Dropdown.Content>
-                            {route().current('home') && (
-                                <>
-                                    <Dropdown.Link href={route('posts.edit', post.id)}>Edit</Dropdown.Link>
-                                    <Dropdown.Link method="post" onSuccess={() => toast.success('Successfully moved to archives.')} href={route('posts.moveArchive', post.id)}>Move to archives</Dropdown.Link>
-                                    <Dropdown.Link method="post" onSuccess={() => toast.success('Successfully moved to bin.')} href={route('posts.destroy', post.id)}>Delete this post</Dropdown.Link>
-                                </>
-                            )}
-                            {route().current('posts.archive') && (
-                                <>
-                                    <Dropdown.Link method="post" onSuccess={() => toast.success('Successfully restored from archive.')} href={route('posts.restoreArchive', post.id)}>Restore</Dropdown.Link>
-                                    <Dropdown.Link method="post" onSuccess={() => toast.success('Successfully moved to bin.')} href={route('posts.destroy', post.id)}>Move this to bin</Dropdown.Link>
-                                </>
-                            )}
-                            {route().current('posts.bin') && (
-                                <>
-                                    <Dropdown.Link method="post" onSuccess={() => toast.success('Successfully restored from bin.')} href={route('posts.restore', post.id)}>Restore</Dropdown.Link>
-                                    <Dropdown.Link method="post" onSuccess={() => toast.success('Permanently deleted.')} href={route('posts.forceDelete', post.id)}>Delete permanently</Dropdown.Link>
-                                </>
-                            )}
-                        </Dropdown.Content>
-                    </Dropdown>
+                    <>
+
+                        {is_admin &&
+
+                            <Dropdown>
+                                <Dropdown.Trigger>
+                                    <IconButton aria-label="settings">
+                                        <MoreVertIcon />
+                                    </IconButton>
+                                </Dropdown.Trigger>
+                                <Dropdown.Content>
+                                    {route().current('home') && (
+                                        <>
+                                            <Dropdown.Link href={route('posts.edit', post.id)}>Edit</Dropdown.Link>
+                                            <Dropdown.Link method="post" onSuccess={() => toast.success('Successfully moved to archives.')} href={route('posts.moveArchive', post.id)}>Move to archives</Dropdown.Link>
+                                            <Dropdown.Link method="post" onSuccess={() => toast.success('Successfully moved to bin.')} href={route('posts.destroy', post.id)}>Delete this post</Dropdown.Link>
+                                        </>
+                                    )}
+                                    {route().current('posts.archive') && (
+                                        <>
+                                            <Dropdown.Link method="post" onSuccess={() => toast.success('Successfully restored from archive.')} href={route('posts.restoreArchive', post.id)}>Restore</Dropdown.Link>
+                                            <Dropdown.Link method="post" onSuccess={() => toast.success('Successfully moved to bin.')} href={route('posts.destroy', post.id)}>Move this to bin</Dropdown.Link>
+                                        </>
+                                    )}
+                                    {route().current('posts.bin') && (
+                                        <>
+                                            <Dropdown.Link method="post" onSuccess={() => toast.success('Successfully restored from bin.')} href={route('posts.restore', post.id)}>Restore</Dropdown.Link>
+                                            <Dropdown.Link method="post" onSuccess={() => toast.success('Permanently deleted.')} href={route('posts.forceDelete', post.id)}>Delete permanently</Dropdown.Link>
+                                        </>
+                                    )}
+                                </Dropdown.Content>
+                            </Dropdown>
+                        }
+                    </>
                 }
                 title={post?.name}
                 subheader={post?.created_at}
@@ -79,7 +85,7 @@ export default function PostCard({ post }) {
 
             <CardActions disableSpacing>
                 {reactionIcons.map(({ icon: Icon, type }) => (
-                    <IconButton onClick={()=>handleReact(type)} key={type} sx={{ color: post.user_reaction === type ? 'red' : '' }}>
+                    <IconButton onClick={() => handleReact(type)} key={type} sx={{ color: post.user_reaction === type ? 'red' : '' }}>
                         <Icon />
                         <span className='text-sm'>{post.reactions[type] || ''}</span>
                     </IconButton>
