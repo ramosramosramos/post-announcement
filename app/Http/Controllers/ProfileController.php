@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Http\Requests\StoreAvatarRequest;
+use App\Models\Section;
+use App\Models\YearLevel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -21,11 +23,16 @@ class ProfileController extends Controller
     public function edit(Request $request): Response
     {
         $qrcode = QrCode::format('svg')->size(250)->generate(route('home'));
-
+        $sections = Section::select(['id', 'name'])->get();
+        $year_levels = YearLevel::select(['id', 'name'])->get();
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
-            'qrcode' => ''.$qrcode, // Convert QR code to base64 image
+            'qrcode' => '' . $qrcode,
+            'props' => [
+                'sections' => $sections,
+                'year_levels' => $year_levels,
+            ], // Convert QR code to base64 image
         ]);
     }
 

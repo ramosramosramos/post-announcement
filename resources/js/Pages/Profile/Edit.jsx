@@ -8,7 +8,7 @@ import html2canvas from "html2canvas";
 import { useRef } from 'react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import UpdateAvatar from './Partials/UpdateAvatar';
-export default function Edit({ mustVerifyEmail, status, qrcode }) {
+export default function Edit({ mustVerifyEmail, status, qrcode,props }) {
     const { is_admin } = usePage().props.auth;
     const qrCodeRef = useRef();
 
@@ -57,6 +57,7 @@ export default function Edit({ mustVerifyEmail, status, qrcode }) {
                         <UpdateProfileInformationForm
                             mustVerifyEmail={mustVerifyEmail}
                             status={status}
+                            props={props}
                             className="max-w-xl"
                         />
 

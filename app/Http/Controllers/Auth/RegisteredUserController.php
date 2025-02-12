@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Section;
 use App\Models\User;
+use App\Models\YearLevel;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class RegisteredUserController extends Controller
     public function create(): Response
     {
         $sections = Section::select(['id', 'name'])->get();
-        $year_levels = Section::select(['id', 'name'])->get();
+        $year_levels = YearLevel::select(['id', 'name'])->get();
 
         return Inertia::render('Auth/Register', [
             'props' => [
@@ -43,12 +44,16 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'year_level' => ['required', 'string',],
+            'section' => ['required', 'string',],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'year_level' => $request->year_level,
+            'section' => $request->section,
         ]);
 
         event(new Registered($user));

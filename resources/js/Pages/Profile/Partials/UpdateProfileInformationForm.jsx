@@ -5,11 +5,13 @@ import TextInput from '@/Components/Inputs/TextInput';
 import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { toast } from 'react-toastify';
+import SelectInput from '@/Components/Inputs/SelectInput';
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
     status,
     className = '',
+    props,
 }) {
     const user = usePage().props.auth.user;
 
@@ -17,17 +19,19 @@ export default function UpdateProfileInformation({
         useForm({
             name: user.name,
             email: user.email,
+            year_level: user.year_level,
+            section: user.section,
         });
 
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('profile.update'),{
-            preserveScroll:true,
-            onSuccess:()=>{
+        post(route('profile.update'), {
+            preserveScroll: true,
+            onSuccess: () => {
                 toast.success('Successfully updated.')
             },
-            onError:(errors)=>{
+            onError: (errors) => {
                 toast.error(errors.name)
                 toast.error(errors.email)
             }
@@ -101,6 +105,47 @@ export default function UpdateProfileInformation({
                         )}
                     </div>
                 )}
+
+
+                <div className="mt-4">
+                    <InputLabel
+                        htmlFor="year_level"
+                        value="Grade / Year level"
+                    />
+
+                    <SelectInput value={data.year_level} onChange={(e) => setData('year_level', e.target.value)} >
+                        <option value="">Select Grade / Year level</option>
+                        {props && props.year_levels.map((level) => (
+                            <option key={level.id} value={level.name}>
+                                {level.name}
+                            </option>
+                        ))}
+                    </SelectInput>
+                    <InputError
+                        message={errors.year_level}
+                        className="mt-2"
+                    />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel
+                        htmlFor="section"
+                        value="Select section"
+                    />
+
+                    <SelectInput value={data.section} onChange={(e) => setData('section', e.target.value)} >
+                        <option value="">Select section</option>
+                        {props && props.sections.map((level) => (
+                            <option key={level.id} value={level.name}>
+                                {level.name}
+                            </option>
+                        ))}
+                    </SelectInput>
+                    <InputError
+                        message={errors.section}
+                        className="mt-2"
+                    />
+                </div>
 
                 <div className="flex items-center gap-4">
                     <PrimaryButton disabled={processing}>Save</PrimaryButton>
