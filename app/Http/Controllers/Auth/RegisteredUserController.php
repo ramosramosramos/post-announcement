@@ -10,6 +10,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
@@ -22,14 +23,18 @@ class RegisteredUserController extends Controller
      */
     public function create(): Response
     {
-        $sections = Section::select(['id', 'name'])->get();
-        $year_levels = YearLevel::select(['id', 'name'])->get();
+        $props = Cache::remember('sections_year', now()->addHours(24), function () {
+            $sections = Section::select(['id', 'name'])->get();
+            $year_levels = YearLevel::select(['id', 'name'])->get();
 
-        return Inertia::render('Auth/Register', [
-            'props' => [
+            return [
                 'sections' => $sections,
                 'year_levels' => $year_levels,
-            ],
+            ];
+        });
+
+        return Inertia::render('Auth/Register', [
+            'props' => $props,
         ]);
     }
 
@@ -44,8 +49,8 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'year_level' => ['required', 'string',],
-            'section' => ['required', 'string',],
+            'year_level' => ['required', 'string'],
+            'section' => ['required', 'string'],
         ]);
 
         $user = User::create([

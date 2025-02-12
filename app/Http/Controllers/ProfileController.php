@@ -10,6 +10,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -23,16 +24,21 @@ class ProfileController extends Controller
     public function edit(Request $request): Response
     {
         $qrcode = QrCode::format('svg')->size(250)->generate(route('home'));
-        $sections = Section::select(['id', 'name'])->get();
-        $year_levels = YearLevel::select(['id', 'name'])->get();
+        $props = Cache::remember('sections_year', now()->addHours(24), function () {
+            $sections = Section::select(['id', 'name'])->get();
+            $year_levels = YearLevel::select(['id', 'name'])->get();
+
+            return [
+                'sections' => $sections,
+                'year_levels' => $year_levels,
+            ];
+        });
+
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
-            'qrcode' => '' . $qrcode,
-            'props' => [
-                'sections' => $sections,
-                'year_levels' => $year_levels,
-            ], // Convert QR code to base64 image
+            'qrcode' => ''.$qrcode,
+            'props' => $props,
         ]);
     }
 
