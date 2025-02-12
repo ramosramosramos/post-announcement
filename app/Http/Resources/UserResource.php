@@ -19,6 +19,8 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
+            'section' => $this->section,
+            'year_level' => $this->year_level,
             'avatar' => $this->media->value('id') ? Storage::url($this->media->value('id').'/'.$this->media->value('file_name')) : null,
         ];
     }

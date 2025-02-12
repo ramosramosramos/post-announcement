@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
             'role' => 'admin',
+            'year_level' => 'Grade 12',
+            'section' => 'A',
             'password' => Hash::make('password'),
             'remember_token' => str()->random(10),
         ]);
@@ -30,17 +32,12 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin2@gmail.com',
             'email_verified_at' => now(),
             'role' => 'admin',
+            'year_level' => 'Grade 12',
+            'section' => 'A',
             'password' => Hash::make('password'),
             'remember_token' => str()->random(10),
         ]);
-        User::create([
-            'name' => 'Kent Jerone Ramos',
-            'email' => 'ramoskent12@gmail.com',
-            'email_verified_at' => now(),
-            'role' => 'user',
-            'password' => Hash::make('password'),
-            'remember_token' => str()->random(10),
-        ]);
+
 
         $this->call([
             SectionSeeder::class,
