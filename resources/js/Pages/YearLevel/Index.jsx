@@ -15,7 +15,7 @@ export default function Index({ year_levels }) {
                 </h2>
             }
         >
-            <Head title="year_levels" />
+            <Head title="Grade / Year Level" />
 
             <div className="py-12 w-full">
                 <div className="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
