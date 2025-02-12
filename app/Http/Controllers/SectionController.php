@@ -29,7 +29,7 @@ class SectionController extends Controller
 
     public function update(UpdateSectionRequest $request, Section $section)
     {
-        //
+        $section->update($request->validated());
     }
 
     /**
