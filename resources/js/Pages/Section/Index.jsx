@@ -44,7 +44,7 @@ export default function Index({ sections }) {
                         </div>
                     </WhenVisible>
                     <div className='flex justify-center'>
-                        {/* <DefaultPaginator links={sections.meta} /> */}
+                        <DefaultPaginator links={sections.meta} />
                     </div>
                 </div>
             </div>

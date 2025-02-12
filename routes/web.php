@@ -4,6 +4,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\YearLevelController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
@@ -28,6 +29,11 @@ Route::middleware('auth')->group(function () {
         Route::post('/sections/store', [SectionController::class, 'store'])->name('sections.store');
         Route::post('/sections/{section}/update', [SectionController::class, 'update'])->name('sections.update');
         Route::post('/sections/{section}/destroy', [SectionController::class, 'destroy'])->name('sections.destroy');
+
+        Route::get('/year_levels', [YearLevelController::class, 'index'])->name('year_levels.index');
+        Route::post('/year_levels/store', [YearLevelController::class, 'store'])->name('year_levels.store');
+        Route::post('/year_levels/{year_level}/update', [YearLevelController::class, 'update'])->name('year_levels.update');
+        Route::post('/year_levels/{year_level}/destroy', [YearLevelController::class, 'destroy'])->name('year_levels.destroy');
     });
 
     Route::post('/posts/{post}/react', [PostController::class, 'react'])->name('posts.react');
