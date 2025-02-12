@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (!app()->runningInConsole() || app()->runningUnitTests()) {
+        if (! app()->runningInConsole() || app()->runningUnitTests()) {
             post::observe(PostObserver::class);
         }
         Vite::prefetch(concurrency: 3);

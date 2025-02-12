@@ -2,16 +2,14 @@
 
 namespace App\Jobs;
 
-use App\Mail\PostMail;
-use App\Models\User;
 use App\Models\Post;
+use App\Models\User;
 use App\Notifications\PostNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-
 
 class PostJob implements ShouldQueue
 {
@@ -24,6 +22,6 @@ class PostJob implements ShouldQueue
 
     public function handle(): void
     {
-       $this->user->notify(new PostNotification($this->post));
+        $this->user->notify(new PostNotification($this->post));
     }
 }

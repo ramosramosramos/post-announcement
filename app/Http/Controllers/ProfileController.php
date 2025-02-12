@@ -25,7 +25,7 @@ class ProfileController extends Controller
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
-            'qrcode' => '' . $qrcode, // Convert QR code to base64 image
+            'qrcode' => ''.$qrcode, // Convert QR code to base64 image
         ]);
     }
 
@@ -44,9 +44,10 @@ class ProfileController extends Controller
 
         return Redirect::route('profile.edit');
     }
+
     public function avatar(StoreAvatarRequest $request): RedirectResponse
     {
-        $user =  $request->user();
+        $user = $request->user();
 
         if ($request->hasFile('avatar')) {
             if ($user->media()->value('id')) {

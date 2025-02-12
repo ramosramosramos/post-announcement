@@ -9,7 +9,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/', [PostController::class, 'index'])->name('home');
     Route::middleware(['admin'])->group(function () {
-        
+
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
         Route::get('/users/{user}/view', [UserController::class, 'show'])->name('users.show');
 

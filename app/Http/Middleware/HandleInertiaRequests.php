@@ -37,7 +37,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $user,
                 'is_admin' => $user?->role == 'admin',
-                'avatar' =>  $user?->media->value('id') ? Storage::url($user ->media->value('id').'/'.$user ->media->value('file_name')) : null,
+                'avatar' => $user?->media->value('id') ? Storage::url($user->media->value('id').'/'.$user->media->value('file_name')) : null,
 
             ],
         ];

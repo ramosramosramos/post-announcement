@@ -22,7 +22,7 @@ class StoreAvatarRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'avatar'=>['nullable','file'],
+            'avatar' => ['nullable', 'file'],
         ];
     }
 }

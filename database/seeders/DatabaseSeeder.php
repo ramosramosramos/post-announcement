@@ -41,6 +41,11 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'remember_token' => str()->random(10),
         ]);
+
+        $this->call([
+            SectionSeeder::class,
+            YearLevelSeeder::class,
+        ]);
         // User::factory(10)->create();
         // Post::factory(100)->create();
         // Reaction::factory(100)->create();
