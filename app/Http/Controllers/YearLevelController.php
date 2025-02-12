@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreYearLevelRequest;
 use App\Http\Requests\UpdateYearLevelRequest;
+use App\Http\Resources\YearLevelResource;
 use App\Models\YearLevel;
 
 class YearLevelController extends Controller
@@ -13,15 +14,9 @@ class YearLevelController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $year_levels = YearLevel::select(['id', 'name', 'created_at'])->paginate(20);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return inertia('YearLevel/Index', ['year_levels' => YearLevelResource::collection($year_levels)]);
     }
 
     /**
@@ -29,38 +24,19 @@ class YearLevelController extends Controller
      */
     public function store(StoreYearLevelRequest $request)
     {
-        //
+        YearLevel::create($request->validated());
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(YearLevel $yearLevel)
+    public function update(UpdateYearLevelRequest $request, YearLevel $year_level)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(YearLevel $yearLevel)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateYearLevelRequest $request, YearLevel $yearLevel)
-    {
-        //
+        $year_level->update($request->validated());
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(YearLevel $yearLevel)
+    public function destroy(YearLevel $year_level)
     {
-        //
+        $year_level->delete();
     }
 }

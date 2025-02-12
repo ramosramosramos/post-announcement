@@ -11,7 +11,7 @@ class StoreYearLevelRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class StoreYearLevelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'string', 'unique:year_levels,name'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.unique' => 'The Grade / Year level has already been taken.',
         ];
     }
 }

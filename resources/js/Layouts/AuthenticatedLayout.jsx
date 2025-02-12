@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 
 export default function AuthenticatedLayout({ header, children }) {
-    const { user,is_admin } = usePage().props.auth;
+    const { user, is_admin } = usePage().props.auth;
     const { url } = usePage();
     const [openSideBar, setOpenSideBar] = useState(false);
 
@@ -39,24 +39,27 @@ export default function AuthenticatedLayout({ header, children }) {
                 aria-label="Sidebar"
             >
                 <div className="w-full flex items-center flex-col gap-2 p-4">
-                    <SideLink href={route('home')} active={route().current('home') || route().current('posts.create') || route().current('posts.edit') }>
+                    <SideLink href={route('home')} active={route().current('home') || route().current('posts.create') || route().current('posts.edit')}>
                         Home
                     </SideLink>
-                  { is_admin && <>
-                    <SideLink href={route('posts.archive')} active={route().current('posts.archive')}>
-                        Archives
-                    </SideLink>
-                    <SideLink href={route('posts.bin')} active={route().current('posts.bin')}>
-                        Bin
-                    </SideLink>
-                    <SideLink href={route('users.index')} active={url.startsWith('/users')}>
-                       Find users
-                    </SideLink>
-                    <SideLink href={route('sections.index')} active={url.startsWith('/sections')}>
-                       Sections
-                    </SideLink>
+                    {is_admin && <>
+                        <SideLink href={route('posts.archive')} active={route().current('posts.archive')}>
+                            Archives
+                        </SideLink>
+                        <SideLink href={route('posts.bin')} active={route().current('posts.bin')}>
+                            Bin
+                        </SideLink>
+                        <SideLink href={route('users.index')} active={url.startsWith('/users')}>
+                            Find users
+                        </SideLink>
+                        <SideLink href={route('sections.index')} active={url.startsWith('/sections')}>
+                            Sections
+                        </SideLink>
+                        <SideLink href={route('year_levels.index')} active={url.startsWith('/year_levels')}>
+                            Grade / Year levels
+                        </SideLink>
 
-                  </>}
+                    </>}
                     <SideLink href={route('profile.edit')} active={url.startsWith('/profile')}>
                         Profile
                     </SideLink>
@@ -71,11 +74,11 @@ export default function AuthenticatedLayout({ header, children }) {
                 {/* Main Content */}
                 <main className="mt-[60px] w-full min-h-screen p-4">
                     <header className="w-[95%] flex flex-col gap-10 m-auto text-start p-5 text-white">
-                 { !route().current('home') &&
-                           <BackLink  href={route('home')} className="flex gap-3 text-sm items-center text-gray-800 hover:text-gray-700 w-[max-content]">
-                           Back to home
-                       </BackLink>
-                 }
+                        {!route().current('home') &&
+                            <BackLink href={route('home')} className="flex gap-3 text-sm items-center text-gray-800 hover:text-gray-700 w-[max-content]">
+                                Back to home
+                            </BackLink>
+                        }
                         {header}
                     </header>
                     {children}
