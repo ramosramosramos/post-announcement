@@ -1,10 +1,10 @@
 import { useForm } from "@inertiajs/react";
-import Modal from "../Modals/Modal";
+import Modal from "../Modal";
 import { useState } from "react";
 import InputLabel from "../Inputs/InputLabel";
 import TextInput from "../Inputs/TextInput";
 import InputError from "../Inputs/InputError";
-import PrimaryButton from "../Buttons/PrimaryButton";
+import PrimaryButton from "../PrimaryButton";
 import DangerButton from "../Buttons/DangerButton";
 import { toast } from "react-toastify";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -53,8 +53,8 @@ export default function
                 toast.success('Successfully created.');
                 formCreate.setData('name', '');
             },
-            onError: () => {
-                toast.error("Sorry!, There's an error occured.");
+            onError: (errors) => {
+                toast.error(errors.name);
             }
         })
 
@@ -67,8 +67,8 @@ export default function
                 closeEditModal();
                 toast.success('Successfully updated.');
             },
-            onError: () => {
-                toast.error("Sorry!, There's an error occured.");
+            onError: (errors) => {
+                toast.error(errors.name);
             }
         })
 
@@ -129,8 +129,8 @@ export default function
             <section className='grid sm:grid-cols-2 md:grid-cols-4 gap-2'>
 
                 {items && items?.map((item) => (
-                    <div key={item.id} className='flex flex-col p-5 rounded-md bg-gray-900 shadow-md'>
-                        <p className='text-gray-100  font-bold'>{label} : {item.name} </p>
+                    <div key={item.id} className='flex flex-col p-5 rounded-md bg-gray-100 shadow-md'>
+                        <p className='text-gray-700  font-bold'>{label} : {item.name} </p>
                         <p className='text-sm font-thin text-gray-500'>Created at : {item.created_at}</p>
                         {(!forceDeleteURL || !restoreURL) && <div className='flex gap-3 self-end '>
                             <button onClick={() => handleSelectedEdit(item)} className='mt-4 bg-blue-600 hover:bg-blue-500 text-white text-sm px-2 rounded-sm'>Edit  </button>
@@ -168,7 +168,7 @@ export default function
                                 autoComplete="name"
                             />
 
-                            <InputError className="mt-2" message={formCreate.errors.name} />
+
                         </div>
                         <PrimaryButton>
                             Create
@@ -191,7 +191,7 @@ export default function
                                 autoComplete="name"
                             />
 
-                            <InputError className="mt-2" message={form.errors.name} />
+
                         </div>
                         <PrimaryButton>
                             Save

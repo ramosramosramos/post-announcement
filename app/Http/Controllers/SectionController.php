@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSectionRequest;
 use App\Http\Requests\UpdateSectionRequest;
+use App\Http\Resources\SectionResource;
 use App\Models\Section;
 
 class SectionController extends Controller
@@ -13,15 +14,9 @@ class SectionController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $sections = Section::select(['id', 'name', 'created_at'])->paginate(20);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return inertia('Section/Index', ['sections' => SectionResource::collection($sections)]);
     }
 
     /**
@@ -29,28 +24,9 @@ class SectionController extends Controller
      */
     public function store(StoreSectionRequest $request)
     {
-        //
+        Section::create($request->validated());
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Section $section)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Section $section)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateSectionRequest $request, Section $section)
     {
         //
@@ -61,6 +37,6 @@ class SectionController extends Controller
      */
     public function destroy(Section $section)
     {
-        //
+        $section->delete();
     }
 }

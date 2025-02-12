@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/posts/{id}/forceDelete', [PostController::class, 'forceDelete'])->name('posts.forceDelete');
 
         Route::get('/sections', [SectionController::class, 'index'])->name('sections.index');
+        Route::post('/sections/store', [SectionController::class, 'store'])->name('sections.store');
         Route::post('/sections/{section}/update', [SectionController::class, 'update'])->name('sections.update');
         Route::post('/sections/{section}/destroy', [SectionController::class, 'destroy'])->name('sections.destroy');
     });
