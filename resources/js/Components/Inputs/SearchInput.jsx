@@ -7,9 +7,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useForm } from '@inertiajs/react';
 
 
-export default function SearchInput({ search }) {
+export default function SearchInput({ search ,filter}) {
     const form = useForm({
         search: '',
+        section: filter?.section,
+        year_level: filter?.year_level,
     })
     const submit = (e) => {
         e.preventDefault();

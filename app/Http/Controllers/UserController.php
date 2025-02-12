@@ -13,20 +13,33 @@ class UserController extends Controller
     public function index()
     {
         $search = request()->input('search');
+        $section = request()->input('section');
+        $year_level = request()->input('year_level');
 
         $users = User::with(['media'])
             ->when($search, function ($query) use ($search) {
                 $query->where('name', 'like', '%'.$search.'%');
-
             })
-            ->select(['id', 'name', 'section', 'year_level'])->paginate(10);
+            ->when($section, function ($query) use ($section) {
+                $query->where('section', 'like', '%'.$section.'%');
+            })
+            ->when($year_level, function ($query) use ($year_level) {
+                $query->where('year_level', 'like', '%'.$year_level.'%');
+            })
+            ->select(['id', 'name', 'section', 'year_level'])
+            ->paginate(10)->withQueryString();
 
         return inertia('User/Index', [
             'users' => UserResource::collection($users),
-            'search' => $search,
+            'filter' => [
+                'search' => $search,
+                'section' => $section,
+                'year_level' => $year_level,
+            ],
             'props' => $this->props(),
         ]);
     }
+
 
     public function show(User $user)
     {
