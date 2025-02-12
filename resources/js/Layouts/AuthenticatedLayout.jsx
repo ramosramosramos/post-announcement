@@ -49,10 +49,10 @@ export default function AuthenticatedLayout({ header, children }) {
                     <SideLink href={route('posts.bin')} active={route().current('posts.bin')}>
                         Bin
                     </SideLink>
-                  </>}
                     <SideLink href={route('users.index')} active={url.startsWith('/users')}>
                        Find users
                     </SideLink>
+                  </>}
                     <SideLink href={route('profile.edit')} active={url.startsWith('/profile')}>
                         Profile
                     </SideLink>
