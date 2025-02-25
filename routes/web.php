@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionController;
@@ -34,6 +35,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/year_levels/store', [YearLevelController::class, 'store'])->name('year_levels.store');
         Route::post('/year_levels/{year_level}/update', [YearLevelController::class, 'update'])->name('year_levels.update');
         Route::post('/year_levels/{year_level}/destroy', [YearLevelController::class, 'destroy'])->name('year_levels.destroy');
+
+
+        Route::get('messages', [MessageController::class, 'index'])->name('messages.index');
     });
 
     Route::post('/posts/{post}/react', [PostController::class, 'react'])->name('posts.react');

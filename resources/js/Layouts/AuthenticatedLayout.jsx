@@ -58,6 +58,9 @@ export default function AuthenticatedLayout({ header, children }) {
                         <SideLink href={route('year_levels.index')} active={url.startsWith('/year_levels')}>
                             Grade / Year levels
                         </SideLink>
+                        <SideLink href={route('messages.index')} active={url.startsWith('/messages')}>
+                            Messages
+                        </SideLink>
 
                     </>}
                     <SideLink href={route('profile.edit')} active={url.startsWith('/profile')}>
