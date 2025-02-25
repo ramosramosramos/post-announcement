@@ -25,11 +25,13 @@ class YearLevelController extends Controller
     public function store(StoreYearLevelRequest $request)
     {
         YearLevel::create($request->validated());
+        cache()->forget('sections_year');
     }
 
     public function update(UpdateYearLevelRequest $request, YearLevel $year_level)
     {
         $year_level->update($request->validated());
+        cache()->forget('sections_year');
     }
 
     /**
@@ -38,5 +40,7 @@ class YearLevelController extends Controller
     public function destroy(YearLevel $year_level)
     {
         $year_level->delete();
+
+        cache()->forget('sections_year');
     }
 }

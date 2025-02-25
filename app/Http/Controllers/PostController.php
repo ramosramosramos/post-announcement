@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Models\Reaction;
+use App\Services\MessageService;
 use Illuminate\Http\Request;
 
 class PostController extends Controller

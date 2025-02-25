@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
             'year_level' => 'Grade 12',
             'section' => 'A',
+            'phone' => '09654061195',
             'password' => Hash::make('password'),
             'remember_token' => str()->random(10),
         ]);

@@ -25,11 +25,13 @@ class SectionController extends Controller
     public function store(StoreSectionRequest $request)
     {
         Section::create($request->validated());
+        cache()->forget('sections_year');
     }
 
     public function update(UpdateSectionRequest $request, Section $section)
     {
         $section->update($request->validated());
+        cache()->forget('sections_year');
     }
 
     /**
@@ -38,5 +40,6 @@ class SectionController extends Controller
     public function destroy(Section $section)
     {
         $section->delete();
+        cache()->forget('sections_year');
     }
 }

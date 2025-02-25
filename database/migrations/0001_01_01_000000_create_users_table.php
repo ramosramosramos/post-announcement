@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('role')->default('user');
             $table->string('year_level')->nullable();
             $table->string('section')->nullable();
+            $table->string('phone')->nullable();
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
