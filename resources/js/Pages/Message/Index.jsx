@@ -34,11 +34,26 @@ export default function Index({ users }) {
     const submitHandler = (e) => {
         e.preventDefault();
 
+
+
         post(route('messages.send'), {
             preserveScroll: true,
             onSuccess: () => {
+
+                if (data.phones.length !== 0) {
+                    data.phones.forEach(phone => {
+                        fetch(`http://${data.ipAddress}:8080/v1/sms/send/?phone=${phone}&message=${data.message}`).then((res) => {
+                            console.log(res);
+                        }
+                        ).catch((err) => {
+                            console.log(err);
+                        }
+                        );
+                    });
+                }
                 toast.success('Message sent successfully');
-                setData({ message: '', ipAddress: '', phones: [] });
+                setData({ message: '', phones: [] });
+                setIsAllSelected(false);
             },
             onError: (error) => {
                 toast.error(error.ipAddress);
