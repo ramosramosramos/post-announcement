@@ -1,10 +1,19 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, usePage, WhenVisible } from '@inertiajs/react';
 import FallBackComponent from '@/Components/FallbackComponent';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 export default function Index({ users, filter, props }) {
     const { is_admin } = usePage().props.auth;
 
+    useEffect(()=>{
+
+        axios.get(route('messages.autoSend')).then((response) => {
+            console.log(response);
+        }
+        ).catch((error)=>console.log(error));
+    },[]);
 
     return ( is_admin &&
         <AuthenticatedLayout
