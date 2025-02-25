@@ -12,6 +12,7 @@ export default function Register({props}) {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
+        phone: '',
         password: '',
         password_confirmation: '',
         section: '',
@@ -28,6 +29,7 @@ export default function Register({props}) {
                 console.log(errors.email)
                     toast.error(errors.name)
                     toast.error(errors.email)
+                    toast.error(errors.phone)
                     toast.error(errors.password)
                     toast.error(errors.password_confirmation)
                     toast.error(errors.year_level)
@@ -73,6 +75,21 @@ export default function Register({props}) {
                     />
 
                     <InputError message={errors.email} className="mt-2" />
+                </div>
+                <div className="mt-4">
+                    <InputLabel htmlFor="phone" value="Phone number" />
+
+                    <TextInput
+                        id="phone"
+                        name="phone"
+                        value={data.phone}
+                        className="mt-1 block w-full"
+                        autoComplete="username"
+                        onChange={(e) => setData('phone', e.target.value)}
+
+                    />
+
+                    <InputError message={errors.phone} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
