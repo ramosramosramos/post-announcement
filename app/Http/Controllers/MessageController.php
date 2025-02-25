@@ -12,7 +12,7 @@ class MessageController extends Controller
 {
     public function index()
     {
-        $users = User::where('phone', '!=', null)->select(['id', 'name', 'phone'])->get();
+        $users = User::where('phone', '!=', null)->select(['id', 'name', 'phone'])->orderBy('name','asc')->get();
         return inertia('Message/Index', [
             'users' => $users,
         ]);
@@ -23,16 +23,11 @@ class MessageController extends Controller
         // set_time_limit(360); // Increases the limit to 120 seconds.
 
 
+        if ($request->phones !== []) {
 
-        // for ($i = 0; $i < 100; $i++) {
-        //     $messageService->sendMessage("192.168.253.129", '09292163695', "Test to send message to 0991636195");
-
-        // }
-
-
-        if($request->phones !== []){
-
-            dd($request->all());
+            foreach ($request->phones as $phone) {
+                $messageService->sendMessage($request->ipAddress, $phone, $request->message);
+            }
         }
 
 

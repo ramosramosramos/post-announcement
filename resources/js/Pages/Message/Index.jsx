@@ -3,6 +3,9 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm, usePage } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { toast } from 'react-toastify';
+import InputLabel from '@/Components/Inputs/InputLabel';
+import TextInput from '@/Components/Inputs/TextInput';
+import InputError from '@/Components/Inputs/InputError';
 
 export default function Index({ users }) {
     const { is_admin } = usePage().props.auth;
@@ -24,6 +27,7 @@ export default function Index({ users }) {
     // Form handling
     const { data, setData, post, processing } = useForm({
         message: '',
+        ipAddress: '',
         phones: [],
     });
 
@@ -31,7 +35,13 @@ export default function Index({ users }) {
         e.preventDefault();
 
         post(route('messages.send'), {
+            preserveScroll: true,
+            onSuccess: () => {
+                toast.success('Message sent successfully');
+                setData({ message: '', ipAddress: '', phones: [] });
+            },
             onError: (error) => {
+                toast.error(error.ipAddress);
                 toast.error(error.message);
                 toast.error(error.phones);
             }
@@ -82,7 +92,22 @@ export default function Index({ users }) {
                 <Head title="Users" />
                 <div className="py-12 w-full">
                     <div className="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
-                        <form onSubmit={submitHandler} className="flex flex-col gap-4">
+                        <form onSubmit={submitHandler} className=" bg-[#800000] p-5 rounded-lg  flex flex-col gap-4">
+                            <div className="mt-4">
+                                <InputLabel htmlFor="ipAddress" value="IP Address" />
+
+                                <TextInput
+                                    id="ipAddress"
+                                    name="ipAddress"
+                                    value={data.ipAddress}
+                                    className="mt-1 block w-full"
+                                    autoComplete="username"
+                                    onChange={(e) => setData('ipAddress', e.target.value)}
+
+                                />
+
+                            </div>
+                            <InputLabel htmlFor="ipAddress" value="Message" />
                             <textarea
                                 name="message"
                                 id="message"
@@ -92,7 +117,7 @@ export default function Index({ users }) {
                                 onChange={(e) => setData('message', e.target.value)}
                                 className="border rounded p-2"
                             ></textarea>
-                            <PrimaryButton disabled={processing}>Send</PrimaryButton>
+                            <PrimaryButton className='w-[max-content]' disabled={processing}>Send</PrimaryButton>
                         </form>
 
                         <div className="relative overflow-x-auto">

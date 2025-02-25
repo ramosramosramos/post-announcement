@@ -22,6 +22,7 @@ class SendMessageRequests extends FormRequest
     public function rules(): array
     {
         return [
+            'ipAddress' => ['required', 'string'],
             'phones' => ['required', 'array'],
             'message' => ['required', 'string'],
         ];
@@ -31,6 +32,7 @@ class SendMessageRequests extends FormRequest
     public function messages(): array
     {
         return [
+
             'phones.required' => 'Please select at least one recipient.',
             'message.required' => 'Message is required.',
         ];
