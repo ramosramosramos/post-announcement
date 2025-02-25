@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'role' => 'admin',
             'year_level' => 'Grade 12',
+            'phone' => '09654061196',
             'section' => 'B',
             'password' => Hash::make('password'),
             'remember_token' => str()->random(10),
@@ -43,7 +44,7 @@ class DatabaseSeeder extends Seeder
             SectionSeeder::class,
             YearLevelSeeder::class,
         ]);
-        // User::factory(10)->create();
+        User::factory(10)->create();
         // Post::factory(100)->create();
         // Reaction::factory(100)->create();
     }

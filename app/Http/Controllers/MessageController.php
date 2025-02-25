@@ -2,35 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Services\MessageService;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    public function index(){
-
+    public function index()
+    {
+    $users = User::where('phone', '!=', null)->select(['id','name','phone'])->get();
         return inertia('Message/Index', [
-            'message' => 'Messages sent successfully.'
+            'users' => $users,
         ]);
     }
 
-    public function autoSend(MessageService $messageService){
-        set_time_limit(360); // Increases the limit to 120 seconds.
-
-        $batchSize = 50;
-        $counter = 0;
+    public function send(Request $request, MessageService $messageService)
+    {
+        // set_time_limit(360); // Increases the limit to 120 seconds.
 
 
-        for ($i = 0; $i < 100; $i++) {
-            $messageService->sendMessage("192.168.253.129", '0991636195', "Aliens are coming! Run for your lives!");
-            $counter++;
-            if ($counter % $batchSize === 0) {
-                // Pause for 1-2 seconds between batches to reduce load.
-                sleep(2);
-            }
-        }
-        
-        return ['message'=>'Messages sent successfully.'];
+
+        // for ($i = 0; $i < 100; $i++) {
+        //     $messageService->sendMessage("192.168.253.129", '09292163695', "Test to send message to 0991636195");
+
+        // }
+        dd(request()->all());
+        // return ['message'=>'Messages sent successfully.'];
 
     }
 }

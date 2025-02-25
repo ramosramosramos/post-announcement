@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
 
 
         Route::get('messages', [MessageController::class, 'index'])->name('messages.index');
-        Route::get('messages/autoSend', [MessageController::class, 'autoSend'])->name('messages.autoSend');
+        Route::post('messages/send', [MessageController::class, 'send'])->name('messages.send');
     });
 
     Route::post('/posts/{post}/react', [PostController::class, 'react'])->name('posts.react');
