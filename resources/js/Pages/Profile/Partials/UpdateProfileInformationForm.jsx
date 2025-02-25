@@ -84,7 +84,7 @@ export default function UpdateProfileInformation({
                     <InputError className="mt-2" message={errors.email} />
                 </div>
                 <div>
-                    <InputLabel htmlFor="phone" value="Email" />
+                    <InputLabel htmlFor="phone" value="Phone number" />
 
                     <TextInput
                         id="phone"
