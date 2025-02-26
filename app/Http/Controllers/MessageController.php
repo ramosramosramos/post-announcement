@@ -21,7 +21,5 @@ class MessageController extends Controller
     public function send(SendMessageRequests $request, MessageService $messageService)
     {
 
-
-
     }
 }

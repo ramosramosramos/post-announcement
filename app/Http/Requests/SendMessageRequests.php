@@ -22,7 +22,7 @@ class SendMessageRequests extends FormRequest
     public function rules(): array
     {
         return [
-            'ipAddress' => ['required', 'string'],
+            'apiKey' => ['required', 'string'],
             'phones' => ['required', 'array'],
             'message' => ['required', 'string'],
         ];

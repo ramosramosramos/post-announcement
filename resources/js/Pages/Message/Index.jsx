@@ -27,7 +27,7 @@ export default function Index({ users }) {
     // Form handling
     const { data, setData, post, processing } = useForm({
         message: '',
-        ipAddress: '',
+        apiKey: '',
         phones: [],
     });
 
@@ -42,7 +42,9 @@ export default function Index({ users }) {
 
                 if (data.phones.length !== 0) {
                     data.phones.forEach(phone => {
-                        fetch(`http://${data.ipAddress}:8080/v1/sms/send/?phone=${phone}&message=${data.message}`).then((res) => {
+                        fetch(`https://api.smsmobileapi.com/sendsms/?apikey=${data.apiKey}&recipients=${phone}&message=${data.message}`,
+                           { method: 'GET'}
+                        ).then((res) => {
                             console.log(res);
                         }
                         ).catch((err) => {
@@ -55,8 +57,9 @@ export default function Index({ users }) {
                 setData({ message: '', phones: [] });
                 setIsAllSelected(false);
             },
+
             onError: (error) => {
-                toast.error(error.ipAddress);
+                toast.error(error.apiKey);
                 toast.error(error.message);
                 toast.error(error.phones);
             }
@@ -109,20 +112,20 @@ export default function Index({ users }) {
                     <div className="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
                         <form onSubmit={submitHandler} className=" bg-[#800000] p-5 rounded-lg  flex flex-col gap-4">
                             <div className="mt-4">
-                                <InputLabel htmlFor="ipAddress" value="IP Address" />
+                                <InputLabel htmlFor="apiKey" value="Api key" />
 
                                 <TextInput
-                                    id="ipAddress"
-                                    name="ipAddress"
-                                    value={data.ipAddress}
+                                    id="apiKey"
+                                    name="apiKey"
+                                    value={data.apiKey}
                                     className="mt-1 block w-full"
                                     autoComplete="username"
-                                    onChange={(e) => setData('ipAddress', e.target.value)}
+                                    onChange={(e) => setData('apiKey', e.target.value)}
 
                                 />
 
                             </div>
-                            <InputLabel htmlFor="ipAddress" value="Message" />
+                            <InputLabel htmlFor="apiKey" value="Message" />
                             <textarea
                                 name="message"
                                 id="message"
